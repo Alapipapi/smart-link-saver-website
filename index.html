@@ -6,6 +6,8 @@
     <title>Smart Link Saver - Save and Organize Your Web Links</title>
     <meta name="description" content="Effortlessly save web links with quick notes for easy recall and organization using the Smart Link Saver Chrome Extension.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Basic Reset & General Styles */
         body {
@@ -14,8 +16,94 @@
             padding: 0;
             box-sizing: border-box;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8faff; /* Light background */
+            /* Use variables for colors */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Theme Variables (Light Mode Defaults) */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #6c757d; /* For secondary buttons, etc. */
+
+            --background-color: #f8faff; /* General page background */
+            --section-bg-color-even: #f0f6fa; /* Background for even sections */
+            --hero-gradient-start: #eaf2f8;
+            --hero-gradient-end: #d3e7f5;
+            --header-bg-color: #ffffff;
+            --footer-bg-color: #2c3e50;
+
+            --text-color: #333;
+            --heading-color: #2c3e50;
+            --link-color: #3498db;
+            --link-hover-color: #2980b9;
+            --sub-text-color: #555; /* For secondary text like hero paragraph */
+            --secondary-text-color: #666; /* For smaller descriptive text */
+            --border-color: #e0e6ed;
+            --shadow-color: rgba(0,0,0,0.05); /* General shadows */
+            --shadow-color-hover: rgba(0,0,0,0.08);
+
+            --cta-shadow-primary: rgba(52, 152, 219, 0.3);
+            --cta-shadow-primary-hover: rgba(52, 152, 219, 0.4);
+
+            --code-bg-color: #e9ecef;
+            --code-text-color: #343a40;
+
+            --feature-item-bg: #ffffff;
+            --feature-item-shadow: rgba(0,0,0,0.08);
+            --feature-item-shadow-hover: rgba(0,0,0,0.12);
+
+            --section-list-item-bg: #ffffff;
+            --section-list-item-border: #e0e6ed;
+            --section-list-item-shadow: rgba(0,0,0,0.05);
+            --section-list-item-shadow-hover: rgba(0,0,0,0.08);
+
+            --toggle-background-unchecked: #ccc;
+            --toggle-button-color: white;
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --primary-color: #6ab7ff; /* Lighter blue for dark mode */
+            --secondary-color: #4da5ff;
+            --accent-color: #adb5bd;
+
+            --background-color: #282c34; /* Dark background */
+            --section-bg-color-even: #323842; /* Slightly different dark for even sections */
+            --hero-gradient-start: #2e333c; /* Darker gradient for hero */
+            --hero-gradient-end: #38404c;
+            --header-bg-color: #21252b; /* Darker header */
+            --footer-bg-color: #1a1e23;
+
+            --text-color: #e0e6ed; /* Light text */
+            --heading-color: #f8faff; /* Lighter headings */
+            --link-color: #6ab7ff;
+            --link-hover-color: #4da5ff;
+            --sub-text-color: #b0b8c2;
+            --secondary-text-color: #a0a8b3;
+            --border-color: #495057;
+            --shadow-color: rgba(0,0,0,0.2);
+            --shadow-color-hover: rgba(0,0,0,0.3);
+
+            --cta-shadow-primary: rgba(106, 183, 255, 0.3);
+            --cta-shadow-primary-hover: rgba(106, 183, 255, 0.4);
+
+            --code-bg-color: #3a3f4a;
+            --code-text-color: #d1d9e6;
+
+            --feature-item-bg: #363b45;
+            --feature-item-shadow: rgba(0,0,0,0.15);
+            --feature-item-shadow-hover: rgba(0,0,0,0.25);
+
+            --section-list-item-bg: #363b45;
+            --section-list-item-border: #495057;
+            --section-list-item-shadow: rgba(0,0,0,0.1);
+            --section-list-item-shadow-hover: rgba(0,0,0,0.15);
+
+            --toggle-background-unchecked: #555; /* Darker grey for unchecked toggle in dark mode */
+            --toggle-button-color: #f8faff; /* Lighter button in dark mode */
         }
 
         .container {
@@ -26,7 +114,7 @@
 
         h1, h2, h3 {
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--heading-color); /* Use variable */
             line-height: 1.2;
         }
 
@@ -37,13 +125,14 @@
         p {
             font-size: 1.1em;
             margin-bottom: 1em;
+            color: var(--text-color); /* Use variable */
         }
 
         /* Navigation Bar */
         .navbar {
-            background-color: #ffffff;
+            background-color: var(--header-bg-color); /* Use variable */
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px var(--shadow-color); /* Use variable */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -56,31 +145,122 @@
         .navbar .logo {
             font-size: 1.8em;
             font-weight: 800;
-            color: #3498db;
+            color: var(--primary-color); /* Use variable */
             text-decoration: none;
         }
         .navbar-links a {
-            color: #555;
+            color: var(--sub-text-color); /* Use variable */
             text-decoration: none;
             margin-left: 25px;
             font-weight: 600;
             transition: color 0.3s ease;
         }
         .navbar-links a:hover {
-            color: #3498db;
+            color: var(--primary-color); /* Use variable */
         }
+
+        /* Theme Toggle Wrapper and Icons */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between icon, toggle, and icon */
+            /* Removed margin-left: auto as it will be handled by flex-direction on small screens */
+        }
+
+        .theme-switch-wrapper .theme-icon {
+            font-size: 1.2em; /* Adjust icon size */
+            color: var(--secondary-text-color); /* Default icon color */
+            transition: color 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Light Mode: Sun is active, Moon is dim */
+        .theme-switch-wrapper .theme-icon.light {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+        .theme-switch-wrapper .theme-icon.dark {
+            opacity: 0.5;
+            color: var(--sub-text-color);
+        }
+
+        /* Dark Mode: Moon is active, Sun is dim */
+        body.dark-mode .theme-switch-wrapper .theme-icon.light {
+            opacity: 0.5; /* Dim sun in dark mode */
+            color: var(--sub-text-color);
+        }
+        body.dark-mode .theme-switch-wrapper .theme-icon.dark {
+            opacity: 1; /* Show moon in dark mode */
+            color: var(--primary-color);
+        }
+
+
+        /* Theme Toggle Switch */
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px; /* Adjusted to be more compact */
+            /* No margin-left here, gap handles spacing */
+        }
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-background-unchecked); /* Use variable */
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--toggle-button-color); /* Use variable */
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color); /* Use primary color when checked */
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+        input:checked + .slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 26px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #eaf2f8, #d3e7f5); /* Soft blue gradient */
+            background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end)); /* Use variables for gradient */
             padding: 80px 0;
             text-align: center;
-            color: #2c3e50;
+            color: var(--heading-color); /* Use variable */
         }
         .hero h1 {
             font-size: 3.5em;
             margin-bottom: 15px;
-            color: #2c3e50;
+            color: var(--heading-color); /* Use variable */
             font-weight: 800;
         }
         .hero p {
@@ -88,7 +268,7 @@
             max-width: 800px;
             margin: 0 auto 40px;
             line-height: 1.4;
-            color: #555;
+            color: var(--sub-text-color); /* Use variable */
         }
         .hero .cta-buttons { /* New wrapper for buttons */
             margin-bottom: 40px; /* Space below buttons */
@@ -103,14 +283,18 @@
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
         .hero .cta-button.primary-cta {
-            background-color: #3498db;
+            background-color: var(--primary-color); /* Use variable */
             color: #ffffff;
-            box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 15px var(--cta-shadow-primary); /* Use variable */
         }
         .hero .cta-button.primary-cta:hover {
-            background-color: #2980b9;
+            background-color: var(--secondary-color); /* Use variable */
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 10px 20px var(--cta-shadow-primary-hover); /* Use variable */
+        }
+        /* Adjusted for the new hero section content */
+        .hero p[style] {
+            color: var(--secondary-text-color) !important; /* Specific override for the small text below buttons */
         }
 
         /* Section Styling */
@@ -119,12 +303,12 @@
             text-align: center;
         }
         .section:nth-child(even) { /* Alternate background for sections */
-            background-color: #f0f6fa;
+            background-color: var(--section-bg-color-even); /* Use variable */
         }
         .section-title {
             margin-bottom: 50px;
             font-size: 2.5em;
-            color: #2c3e50;
+            color: var(--heading-color); /* Use variable */
             font-weight: 800;
         }
 
@@ -136,24 +320,24 @@
             margin-top: 50px;
         }
         .feature-item {
-            background-color: #ffffff;
+            background-color: var(--feature-item-bg); /* Use variable */
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 15px var(--feature-item-shadow); /* Use variable */
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .feature-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 20px var(--feature-item-shadow-hover); /* Use variable */
         }
         .feature-item h3 {
-            color: #3498db;
+            color: var(--primary-color); /* Use variable */
             margin-top: 0;
         }
         .feature-item p {
             font-size: 1em;
-            color: #666;
+            color: var(--secondary-text-color); /* Use variable */
         }
 
         /* Screenshot/Demo Section */
@@ -168,12 +352,15 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 15px var(--shadow-color); /* Use variable */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .screenshot-gallery img:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px var(--shadow-color-hover); /* Use variable */
+        }
+        .screenshot-gallery p[style] { /* Specific override for screenshot note */
+            color: var(--secondary-text-color) !important;
         }
 
         /* How it Works / Install Unpacked steps */
@@ -193,14 +380,14 @@
             padding-left: 50px;
             position: relative;
             font-size: 1.1em;
-            color: #444;
+            color: var(--text-color); /* Use variable */
         }
         .how-it-works-steps li::before {
             content: counter(step-counter);
             position: absolute;
             left: 0;
             top: 0;
-            background-color: #3498db;
+            background-color: var(--primary-color); /* Use variable */
             color: #ffffff;
             width: 35px;
             height: 35px;
@@ -210,22 +397,25 @@
             justify-content: center;
             font-weight: 700;
             font-size: 1.2em;
-            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 3px 8px var(--cta-shadow-primary); /* Use variable */
         }
         .how-it-works-steps code {
-            background-color: #e9ecef;
+            background-color: var(--code-bg-color); /* Use variable */
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
             font-size: 0.9em;
-            color: #343a40;
+            color: var(--code-text-color); /* Use variable */
         }
         .how-it-works-steps img { /* Styling for instructional images */
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px var(--shadow-color); /* Use variable */
             margin: 15px 0;
+        }
+        .how-it-works-steps p[style] { /* Specific override for instruction notes */
+            color: var(--secondary-text-color) !important;
         }
 
         /* Updates Section Specifics */
@@ -235,29 +425,29 @@
             margin: 0;
         }
         .updates-content li {
-            background-color: #ffffff;
-            border: 1px solid #e0e6ed;
+            background-color: var(--section-list-item-bg); /* Use variable */
+            border: 1px solid var(--section-list-item-border); /* Use variable */
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 8px var(--section-list-item-shadow); /* Use variable */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .updates-content li:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 12px var(--section-list-item-shadow-hover); /* Use variable */
         }
         .updates-content li strong {
             display: block;
             margin-bottom: 10px;
             font-size: 1.1em;
-            color: #3498db;
+            color: var(--primary-color); /* Use variable */
         }
         .updates-content li ul { /* Inner list for sub-points */
             list-style: disc; /* Use bullets for sub-points */
             margin-left: 20px;
             font-size: 0.95em;
-            color: #555;
+            color: var(--secondary-text-color); /* Use variable */
         }
         .updates-content li ul li {
             background: none; /* No background for inner list items */
@@ -271,11 +461,51 @@
             transform: none;
             box-shadow: none;
         }
+        .updates-content p[style] { /* Specific override for updates note */
+            color: var(--secondary-text-color) !important;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            font-size: 1.1em;
+            color: var(--text-color); /* Use variable */
+        }
+        .contact-content a {
+            color: var(--link-color); /* Use variable */
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-content a:hover {
+            text-decoration: underline;
+            color: var(--link-hover-color); /* Use variable */
+        }
+        /* GitHub Link Button Style */
+        /* GitHub Link Button Style */
+        .github-link-button {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white !important; /* Force text to be white */
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px var(--cta-shadow-primary);
+        }
+
+        .github-link-button:hover {
+            background-color: var(--secondary-color); /* Darker shade on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--cta-shadow-primary-hover);
+        }
+
 
         /* Footer */
         .footer {
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background-color: var(--footer-bg-color); /* Use variable */
+            color: #ecf0f1; /* Kept white for contrast on dark footer */
             padding: 30px 0;
             text-align: center;
             font-size: 0.9em;
@@ -284,6 +514,16 @@
             margin: 0;
             font-size: 1em;
         }
+        .footer a {
+            color: #ffffff; /* Footer links remain white */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #bdc3c7; /* Lighter white on hover */
+        }
+
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -294,16 +534,24 @@
             .hero p { font-size: 1.2em; max-width: 90%; }
             .hero .cta-button { font-size: 1.1em; padding: 15px 30px; }
             .navbar .logo { font-size: 1.5em; }
-            .navbar-links a { margin-left: 15px; }
+            .navbar-links { margin-top: 15px; width: 100%; text-align: center; }
+            .navbar-links a { margin: 0 10px 10px 10px; display: inline-block; }
             .section { padding: 40px 0; }
             .section-title { font-size: 2em; }
             .feature-item { padding: 20px; }
+            /* Adjust navbar for smaller screens, make toggle align center below links */
+            .navbar .container { flex-wrap: wrap; justify-content: center; }
+            .theme-switch-wrapper { 
+                width: 100%; 
+                justify-content: center; 
+                margin-top: 15px; /* Add some space from links */
+            }
         }
 
         @media (max-width: 480px) {
             .navbar .container { flex-direction: column; }
-            .navbar-links { margin-top: 15px; }
-            .navbar-links a { margin: 0 10px; }
+            /* .navbar-links { margin-top: 15px; } */ /* Handled by 768px breakpoint */
+            /* .navbar-links a { margin: 0 10px; } */ /* Handled by 768px breakpoint */
             .hero h1 { font-size: 2em; }
             .hero p { font-size: 1em; }
             .hero .cta-buttons {
@@ -339,6 +587,13 @@
                 <a href="#updates">Updates</a>
                 <a href="#contact">Contact</a>
             </div>
+
+            <div class="theme-switch-wrapper">
+                <i class="fas fa-sun theme-icon light"></i> <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon theme-icon dark"></i> </div>
         </div>
     </nav>
 
@@ -419,6 +674,8 @@
             <div class="screenshot-gallery">
                 <img src="images/screenshot1.png" alt="Smart Link Saver Popup" width="400">
                 <img src="images/screenshot2.png" alt="Smart Link Saver Saved Links Page" width="600">
+                <p style="width: 100%; text-align: center; margin-top: 20px; font-style: italic; color: var(--secondary-text-color);">
+                    (Please replace "images/screenshotX.png" with your actual image paths, or create a subfolder like 'images' and put them there.)
                 </p>
             </div>
         </div>
@@ -430,7 +687,7 @@
             <div class="how-it-works-steps"> <ol>
                     <li>
                         <h3>Download the Zip File</h3>
-                        <p>Click the "Download Unpacked Version" button above and save the <code>smart-link-saver.zip</code> file to your computer.</p>
+                        <p>Click the "Download Smart Link Saver (Unpacked)" button above and save the <code>smart-link-saver.zip</code> file to your computer.</p>
                     </li>
                     <li>
                         <h3>Extract the Folder</h3>
@@ -444,11 +701,13 @@
                         <h3>Enable Developer Mode</h3>
                         <p>In the top-right corner of the Extensions page, toggle on "Developer mode".</p>
                         <img src="images/developer-mode.png" alt="Developer mode toggle" style="max-width: 400px;">
+                        <p style="font-size: 0.9em; color: var(--secondary-text-color);">(Remember to add a screenshot for this step to your 'images' folder!)</p>
                     </li>
                     <li>
                         <h3>Load Unpacked</h3>
                         <p>Click the "Load unpacked" button that appears. Navigate to and select the <code>smart-link-saver</code> folder (the one you extracted, NOT the zip file).</p>
                         <img src="images/load-unpacked.png" alt="Load unpacked button" style="max-width: 400px;">
+                        <p style="font-size: 0.9em; color: var(--secondary-text-color);">(Remember to add a screenshot for this step to your 'images' folder!)</p>
                     </li>
                     <li>
                         <h3>You're Done!</h3>
@@ -463,12 +722,12 @@
         <div class="container">
             <h2 class="section-title">Latest Updates</h2>
             <div class="updates-content" style="max-width: 700px; margin: 0 auto; text-align: left;">
-                <p style="text-align: center; color: #777; font-style: italic; margin-bottom: 30px;">
+                <p style="text-align: center; color: var(--secondary-text-color); font-style: italic; margin-bottom: 30px;">
                     Stay up-to-date with the latest improvements and new features!
                 </p>
                 <ul>
                     <li>
-                        <strong>July 27, 2025 - Version 1.0.0 (Initial Release):</strong>
+                        <strong>July 18, 2025 - Version 1.0.0 (Initial Release):</strong>
                         <ul>
                             <li>Core functionality for saving web links with notes.</li>
                             <li>Clean and intuitive user interface for the extension popup.</li>
@@ -491,7 +750,7 @@
             <p class="contact-content">Have questions, general feedback, or need support? We'd love to hear from you!</p>
 
             <p class="contact-content">
-                For feature requests, bug reports, or technical issues with the Smart Link Saver Extension,
+                For **feature requests, bug reports, or technical issues** with the **Smart Link Saver Extension**,
                 please use our dedicated GitHub Issues tracker. This helps us prioritize and track all feedback efficiently:
                 <br>
                 <a href="https://github.com/Alapipapi/smart-link-saver-website/issues" target="_blank" class="github-link-button">
@@ -501,7 +760,7 @@
             </p>
 
             <p class="contact-content" style="margin-top: 25px;">
-                Want to contribute code or suggest improvements directly to the Smart Link Saver Extension?
+                Want to contribute code or suggest improvements directly to the **Smart Link Saver Extension**?
                 Submit a Pull Request on GitHub:
                 <br>
                 <a href="https://github.com/Alapipapi/smart-link-saver-website/pulls" target="_blank" class="github-link-button">
@@ -516,7 +775,61 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Smart Link Saver. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/Alapipapi/smart-link-saver-website" target="_blank" style="color: #ffffff; text-decoration: none; font-weight: 600; transition: color 0.3s ease;">
+                    View Website Source Code on GitHub
+                </a>
+            </p>
         </div>
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('checkbox');
+        const body = document.body;
+        const localStorageKey = 'smartLinkSaverTheme';
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.checked = true;
+            } else {
+                body.classList.remove('dark-mode');
+                themeToggle.checked = false;
+            }
+            localStorage.setItem(localStorageKey, theme);
+        }
+
+        // Check for saved theme preference on load
+        const savedTheme = localStorage.getItem(localStorageKey);
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            // Detect system preference if no user preference is saved
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+
+        // Listen for changes on the toggle switch
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+        // (Optional) Listen for changes in OS dark mode preference after page load
+        // This will update the site if the user changes their OS theme *while* the page is open,
+        // but only if they haven't manually overridden it with the toggle.
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem(localStorageKey)) { // Only react to OS changes if no manual override
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
 </body>
 </html>

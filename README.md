@@ -23,7 +23,7 @@ Smart Link Saver is a powerful Chrome Extension designed to help you effortlessl
 ## Live Website
 
 You can view the live website deployed on Vercel here:
-[smart-link-saver-website.vercel.app](smart-link-saver-website.vercel.app)
+https://smart-link-saver-website.vercel.app/
 
 ## Getting Started (for Website Development)
 

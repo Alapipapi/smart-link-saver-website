@@ -479,7 +479,7 @@
             text-decoration: underline;
             color: var(--link-hover-color); /* Use variable */
         }
-        /* GitHub Link Button Style */
+
         /* GitHub Link Button Style */
         .github-link-button {
             display: inline-flex;
@@ -501,21 +501,21 @@
             box-shadow: 0 6px 12px var(--cta-shadow-primary-hover);
         }
 
-
         /* Footer */
         .footer {
-            background-color: var(--footer-bg-color); /* Use variable */
-            color: #ecf0f1; /* Kept white for contrast on dark footer */
+            background-color: var(--footer-bg-color); /* This variable makes the footer background dark in both light and dark themes */
             padding: 30px 0;
             text-align: center;
             font-size: 0.9em;
+            /* REMOVED: color: #ecf0f1; from here to avoid potential conflicts */
         }
         .footer p {
             margin: 0;
             font-size: 1em;
+            color: #ecf0f1; /* Explicitly set to a light grey for ALL paragraphs in the footer */
         }
         .footer a {
-            color: #ffffff; /* Footer links remain white */
+            color: #ffffff; /* Explicitly set to white for ALL links in the footer */
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;

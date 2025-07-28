@@ -31,7 +31,7 @@ To run this website locally:
 
 1.  Clone this repository:
     ```bash
-    git clone [https://github.com/Alapipapi/smart-link-saver-website.git](https://github.com/Alapipapi/smart-link-saver-website.git)
+    git clone https://github.com/Alapipapi/smart-link-saver-website.git
     ```
 2.  Navigate into the directory:
     ```bash

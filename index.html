@@ -342,6 +342,40 @@
             color: var(--secondary-text-color) !important;
         }
 
+        /* New Secondary CTA Button Style */
+        .hero .cta-button.secondary-cta {
+            background-color: transparent; /* Transparent background */
+            border: 2px solid var(--primary-color); /* Primary color border */
+            color: var(--primary-color); /* Primary color text */
+            margin-left: 20px; /* Space between the two buttons */
+            box-shadow: none; /* No initial shadow */
+        }
+
+        .hero .cta-button.secondary-cta:hover {
+            background-color: var(--primary-color); /* Primary color background on hover */
+            color: white; /* White text on hover */
+            box-shadow: 0 8px 15px var(--cta-shadow-primary); /* Shadow on hover */
+        }
+
+        /* Ensure GitHub icon in the new CTA is black */
+        .hero .cta-button.secondary-cta .fab.fa-github {
+            color: black; /* This explicitly sets the icon color to black */
+        }
+
+        /* Adjustments for CTA buttons on mobile */
+        @media (max-width: 480px) {
+            .hero .cta-button {
+                /* ... existing styles ... */
+                margin-left: 0 !important; /* Remove horizontal margin */
+                margin-bottom: 15px; /* Add vertical margin for stacking */
+                width: 80%; /* Make buttons take more width */
+            }
+
+            .hero .cta-button.secondary-cta {
+                margin-top: 0; /* Align with previous button if flex-direction is column */
+            }
+        }
+
         /* Section Styling */
         .section {
             padding: 60px 0;
@@ -461,6 +495,35 @@
         }
         .how-it-works-steps p[style] {
             color: var(--secondary-text-color) !important;
+        }
+
+        /* Styling for download links within How-to-Install section */
+        .how-it-works-steps .download-link-button {
+            display: inline-block; /* Allows padding and vertical alignment */
+            padding: 6px 12px; /* Small padding */
+            margin: 0 5px; /* Space between links */
+            background-color: var(--primary-color); /* Blue background */
+            color: white !important; /* White text, forced */
+            text-decoration: none; /* No underline */
+            border-radius: 5px; /* Slightly rounded corners */
+            font-weight: 600; /* Bolder text */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px var(--cta-shadow-primary); /* Subtle shadow */
+            font-size: 0.9em; /* Slightly smaller font to fit inline */
+            white-space: nowrap; /* Prevent text from wrapping inside the button */
+        }
+
+        .how-it-works-steps .download-link-button:hover {
+            background-color: var(--secondary-color); /* Darker blue on hover */
+            transform: translateY(-1px); /* Slight lift on hover */
+            box-shadow: 0 3px 8px var(--cta-shadow-primary-hover); /* Enhanced shadow on hover */
+        }
+
+        /* Ensure the icon within this specific button type is white */
+        /* If you add icons to these, ensure they match the text color */
+        /* Example if you added an icon to "GitHub Releases page" link */
+        .how-it-works-steps .download-link-button .fab.fa-github {
+            color: white; /* Make icon white as per button text */
         }
 
         /* Updates Section Specifics */
@@ -676,6 +739,10 @@
             <p>Smart Link Saver is a powerful Chrome extension that lets you quickly save web pages with custom notes, keeping your valuable resources perfectly organized and easily searchable.</p>
             <div class="cta-buttons">
                 <a href="downloads/smart-link-saver.zip" download class="cta-button primary-cta">Download Smart Link Saver (Unpacked)</a>
+                
+                <a href="https://github.com/Alapipapi/smart-link-saver-extension/releases" target="_blank" class="cta-button secondary-cta github-download-cta">
+                    <i class="fab fa-github" style="margin-right: 8px;"></i> Download from GitHub Releases
+                </a>
             </div>
             <p style="font-size: 0.9em; margin-top: 20px; color: var(--secondary-text-color);">
                 (Download the zip file, unzip it, and follow the installation instructions below.)
@@ -721,8 +788,12 @@
             <div class="how-it-works-steps">
                 <ol>
                     <li>
-                        <h3>Download the Extension</h3>
-                        <p>Download the file from the link at the top of this website, or from the GitHub releases page linked on this site.</p>
+                        <h3>Download & Install the Extension</h3>
+                        <p>
+                            First, download the <a href="downloads/smart-link-saver.zip" download class="download-link-button">Unpacked Version (ZIP)</a> directly,
+                            or get it from the <a href="https://github.com/Alapipapi/smart-link-saver-extension/releases" target="_blank" class="download-link-button">GitHub Releases page</a>.
+                            Then, follow the simple installation steps below this section to get it set up in your browser.
+                        </p>
                     </li>
                     <li>
                         <h3>Click the Icon</h3>
@@ -752,49 +823,41 @@
         </div>
     </section>
 
-    <section id="install-unpacked" class="section">
+    <section id="#install-unpacked" class="section">
         <div class="container">
-            <h2 class="section-title">How to Install the Unpacked Packages</h2>
-            <div class="how-it-works-steps"> <ol>
+            <h2 class="section-title">How to Install the Unpacked Version</h2>
+            <div class="how-it-works-steps">
+                <ol>
                     <li>
-                        <h3>Download the Zip File</h3>
-                        <p>Click the "Download Smart Link Saver (Unpacked)" button above, or click the "Download the extension from GitHub Releases" button below, and save the <code>smart-link-saver.zip</code> file to your computer.</p>
+                        <strong>Download the extension:</strong>
+                        Download the <a href="downloads/smart-link-saver.zip" download class="download-link-button">Unpacked Version (ZIP)</a> directly,
+                        or get it from the <a href="https://github.com/Alapipapi/smart-link-saver-extension/releases" target="_blank" class="download-link-button">GitHub Releases page</a>.
+                        Unzip the downloaded file to a convenient location on your computer.
                     </li>
                     <li>
-                        <h3>Extract the Folder</h3>
-                        <p>Unzip the downloaded file. This will create a folder named <code>smart-link-saver</code>.</p>
+                        <strong>Open Chrome Extensions:</strong>
+                        In your Chrome browser, type <code class="inline-code">chrome://extensions</code> into the address bar and press Enter.
                     </li>
                     <li>
-                        <h3>Open Chrome Extensions Page</h3>
-                        <p>In your Chrome browser, go to <code>chrome://extensions</code>. You can type this into the address bar and press Enter.</p>
-                    </li>
-                    <li>
-                        <h3>Enable Developer Mode</h3>
-                        <p>In the top-right corner of the Extensions page, toggle on "Developer mode".</p>
+                        <strong>Enable Developer Mode:</strong>
+                        In the top right corner of the Extensions page, toggle on "Developer mode".
                         <img src="images/developer-mode.png" alt="Developer mode toggle">
                     </li>
                     <li>
-                        <h3>Load Unpacked</h3>
-                        <p>Click the "Load unpacked" button that appears. Navigate to and select the <code>smart-link-saver</code> folder (the one you extracted, NOT the zip file).</p>
+                        <strong>Load the unpacked extension:</strong>
+                        Click on the "Load unpacked" button that appears after enabling developer mode.
                         <img src="images/load-unpacked.png" alt="Load unpacked button">
                     </li>
                     <li>
-                        <h3>You're Done!</h3>
-                        <p>The Smart Link Saver extension should now appear in your list of extensions and be ready to use.</p>
+                        <strong>Select the extension folder:</strong>
+                        Navigate to and select the unzipped "smart-link-saver" folder (or similar name if downloaded from GitHub) that you extracted in step 1.
+                    </li>
+                    <li>
+                        <strong>Enjoy Smart Link Saver:</strong>
+                        The extension should now be installed and visible in your browser's toolbar! You can pin it for easy access.
                     </li>
                 </ol>
             </div>
-
-            <h3 style="margin-top: 60px;">Download Smart Link Saver from GitHub</h3>
-            <p>If you're interested in downloading this extension from GitHub, you can download it from the GitHub Releases page.:</p>
-            <a href="https://github.com/Alapipapi/smart-link-saver-extension/releases" target="_blank" class="github-link-button" style="margin-bottom: 20px;">
-                <i class="fab fa-github" style="margin-right: 8px;"></i>
-                Download the extension from GitHub Releases
-            <a>
-                <p style="font-size: 0.9em; margin-top: 20px; color: var(--secondary-text-color);">
-                    (Download the zip file from the Releases page, unzip it, and follow the installation instructions above.)
-                </p>
-            </a>
         </div>
     </section>
 

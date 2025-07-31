@@ -16,33 +16,32 @@
             padding: 0;
             box-sizing: border-box;
             line-height: 1.6;
-            /* Use variables for colors */
             background-color: var(--background-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Theme Variables (Light Mode Defaults) */
         :root {
             --primary-color: #3498db;
             --secondary-color: #2980b9;
-            --accent-color: #6c757d; /* For secondary buttons, etc. */
+            --accent-color: #6c757d;
 
-            --background-color: #f8faff; /* General page background */
-            --section-bg-color-even: #f0f6fa; /* Background for even sections */
+            --background-color: #f8faff;
+            --section-bg-color-even: #f0f6fa;
             --hero-gradient-start: #eaf2f8;
             --hero-gradient-end: #d3e7f5;
             --header-bg-color: #ffffff;
             --footer-bg-color: #2c3e50;
 
-            --text-color: #333;
+            --text-color: #333; /* Dark grey for light mode */
             --heading-color: #2c3e50;
             --link-color: #3498db;
             --link-hover-color: #2980b9;
-            --sub-text-color: #555; /* For secondary text like hero paragraph */
-            --secondary-text-color: #666; /* For smaller descriptive text */
+            --sub-text-color: #555;
+            --secondary-text-color: #666;
             --border-color: #e0e6ed;
-            --shadow-color: rgba(0,0,0,0.05); /* General shadows */
+            --shadow-color: rgba(0,0,0,0.05);
             --shadow-color-hover: rgba(0,0,0,0.08);
 
             --cta-shadow-primary: rgba(52, 152, 219, 0.3);
@@ -66,19 +65,19 @@
 
         /* Dark Mode Variables */
         body.dark-mode {
-            --primary-color: #6ab7ff; /* Lighter blue for dark mode */
+            --primary-color: #6ab7ff;
             --secondary-color: #4da5ff;
             --accent-color: #adb5bd;
 
-            --background-color: #282c34; /* Dark background */
-            --section-bg-color-even: #323842; /* Slightly different dark for even sections */
-            --hero-gradient-start: #2e333c; /* Darker gradient for hero */
+            --background-color: #282c34;
+            --section-bg-color-even: #323842;
+            --hero-gradient-start: #2e333c;
             --hero-gradient-end: #38404c;
-            --header-bg-color: #21252b; /* Darker header */
+            --header-bg-color: #21252b;
             --footer-bg-color: #1a1e23;
 
-            --text-color: #e0e6ed; /* Light text */
-            --heading-color: #f8faff; /* Lighter headings */
+            --text-color: #e0e6ed; /* Light grey for dark mode */
+            --heading-color: #f8faff;
             --link-color: #6ab7ff;
             --link-hover-color: #4da5ff;
             --sub-text-color: #b0b8c2;
@@ -102,8 +101,8 @@
             --section-list-item-shadow: rgba(0,0,0,0.1);
             --section-list-item-shadow-hover: rgba(0,0,0,0.15);
 
-            --toggle-background-unchecked: #555; /* Darker grey for unchecked toggle in dark mode */
-            --toggle-button-color: #f8faff; /* Lighter button in dark mode */
+            --toggle-background-unchecked: #555;
+            --toggle-button-color: #f8faff;
         }
 
         .container {
@@ -114,7 +113,7 @@
 
         h1, h2, h3 {
             font-weight: 700;
-            color: var(--heading-color); /* Use variable */
+            color: var(--heading-color);
             line-height: 1.2;
         }
 
@@ -125,51 +124,100 @@
         p {
             font-size: 1.1em;
             margin-bottom: 1em;
-            color: var(--text-color); /* Use variable */
+            color: var(--text-color);
         }
 
         /* Navigation Bar */
         .navbar {
-            background-color: var(--header-bg-color); /* Use variable */
+            background-color: var(--header-bg-color);
             padding: 15px 0;
-            box-shadow: 0 2px 10px var(--shadow-color); /* Use variable */
+            box-shadow: 0 2px 10px var(--shadow-color);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         .navbar .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Default: spread logo/nav/toggle */
             align-items: center;
         }
         .navbar .logo {
             font-size: 1.8em;
             font-weight: 800;
-            color: var(--primary-color); /* Use variable */
+            color: var(--primary-color);
             text-decoration: none;
         }
-        .navbar-links a {
-            color: var(--sub-text-color); /* Use variable */
+        /* Hamburger menu icon - Hidden on desktop */
+        .hamburger-menu {
+            display: none; /* Hidden by default on larger screens */
+            cursor: pointer;
+            font-size: 1.8em;
+            color: var(--text-color);
+            z-index: 1001;
+        }
+
+        /* Desktop Navigation Links */
+        .navbar-links-desktop {
+            display: flex; /* Always visible on desktop */
+            /* Center this block between the logo and the theme toggle */
+            margin: 0 auto; /* Pushes itself to the center available space */
+        }
+        .navbar-links-desktop a {
+            color: var(--sub-text-color);
             text-decoration: none;
             margin-left: 25px;
             font-weight: 600;
             transition: color 0.3s ease;
+            padding: 5px 0;
         }
-        .navbar-links a:hover {
-            color: var(--primary-color); /* Use variable */
+        .navbar-links-desktop a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu Container (hidden on desktop) */
+        .mobile-menu-container {
+            display: none; /* Hidden by default on desktop */
+            width: 100%;
+            background-color: var(--header-bg-color);
+            position: absolute; /* Position relative to .navbar */
+            top: 65px; /* Adjust based on navbar height */
+            left: 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            flex-direction: column; /* Stack links vertically */
+            padding: 10px 0;
+            text-align: center;
+            z-index: 999;
+        }
+
+        .mobile-menu-container.active {
+            display: flex; /* Show when active */
+        }
+        .mobile-menu-container a { /* Styles for links within mobile menu */
+            color: var(--sub-text-color);
+            text-decoration: none;
+            margin: 10px 0; /* Stack links vertically */
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color); /* Separator */
+        }
+        .mobile-menu-container a:last-child {
+            border-bottom: none; /* No separator on last link */
+        }
+        .mobile-menu-container a:hover {
+            color: var(--primary-color);
         }
 
         /* Theme Toggle Wrapper and Icons */
         .theme-switch-wrapper {
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between icon, toggle, and icon */
-            /* Removed margin-left: auto as it will be handled by flex-direction on small screens */
+            gap: 10px;
         }
 
         .theme-switch-wrapper .theme-icon {
-            font-size: 1.2em; /* Adjust icon size */
-            color: var(--secondary-text-color); /* Default icon color */
+            font-size: 1.2em;
+            color: var(--secondary-text-color);
             transition: color 0.3s ease, opacity 0.3s ease;
         }
 
@@ -185,22 +233,20 @@
 
         /* Dark Mode: Moon is active, Sun is dim */
         body.dark-mode .theme-switch-wrapper .theme-icon.light {
-            opacity: 0.5; /* Dim sun in dark mode */
+            opacity: 0.5;
             color: var(--sub-text-color);
         }
         body.dark-mode .theme-switch-wrapper .theme-icon.dark {
-            opacity: 1; /* Show moon in dark mode */
+            opacity: 1;
             color: var(--primary-color);
         }
-
 
         /* Theme Toggle Switch */
         .theme-switch {
             position: relative;
             display: inline-block;
             width: 48px;
-            height: 26px; /* Adjusted to be more compact */
-            /* No margin-left here, gap handles spacing */
+            height: 26px;
         }
         .theme-switch input {
             opacity: 0;
@@ -214,7 +260,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: var(--toggle-background-unchecked); /* Use variable */
+            background-color: var(--toggle-background-unchecked);
             -webkit-transition: .4s;
             transition: .4s;
         }
@@ -225,12 +271,12 @@
             width: 20px;
             left: 3px;
             bottom: 3px;
-            background-color: var(--toggle-button-color); /* Use variable */
+            background-color: var(--toggle-button-color);
             -webkit-transition: .4s;
             transition: .4s;
         }
         input:checked + .slider {
-            background-color: var(--primary-color); /* Use primary color when checked */
+            background-color: var(--primary-color);
         }
         input:focus + .slider {
             box-shadow: 0 0 1px var(--primary-color);
@@ -252,15 +298,15 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end)); /* Use variables for gradient */
+            background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end));
             padding: 80px 0;
             text-align: center;
-            color: var(--heading-color); /* Use variable */
+            color: var(--heading-color);
         }
         .hero h1 {
             font-size: 3.5em;
             margin-bottom: 15px;
-            color: var(--heading-color); /* Use variable */
+            color: var(--heading-color);
             font-weight: 800;
         }
         .hero p {
@@ -268,33 +314,32 @@
             max-width: 800px;
             margin: 0 auto 40px;
             line-height: 1.4;
-            color: var(--sub-text-color); /* Use variable */
+            color: var(--sub-text-color);
         }
-        .hero .cta-buttons { /* New wrapper for buttons */
-            margin-bottom: 40px; /* Space below buttons */
+        .hero .cta-buttons {
+            margin-bottom: 40px;
         }
         .hero .cta-button {
             display: inline-block;
             padding: 18px 35px;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 50px;
             text-decoration: none;
             font-size: 1.3em;
             font-weight: 700;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
         .hero .cta-button.primary-cta {
-            background-color: var(--primary-color); /* Use variable */
+            background-color: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 8px 15px var(--cta-shadow-primary); /* Use variable */
+            box-shadow: 0 8px 15px var(--cta-shadow-primary);
         }
         .hero .cta-button.primary-cta:hover {
-            background-color: var(--secondary-color); /* Use variable */
+            background-color: var(--secondary-color);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px var(--cta-shadow-primary-hover); /* Use variable */
+            box-shadow: 0 10px 20px var(--cta-shadow-primary-hover);
         }
-        /* Adjusted for the new hero section content */
         .hero p[style] {
-            color: var(--secondary-text-color) !important; /* Specific override for the small text below buttons */
+            color: var(--secondary-text-color) !important;
         }
 
         /* Section Styling */
@@ -302,13 +347,13 @@
             padding: 60px 0;
             text-align: center;
         }
-        .section:nth-child(even) { /* Alternate background for sections */
-            background-color: var(--section-bg-color-even); /* Use variable */
+        .section:nth-child(even) {
+            background-color: var(--section-bg-color-even);
         }
         .section-title {
             margin-bottom: 50px;
             font-size: 2.5em;
-            color: var(--heading-color); /* Use variable */
+            color: var(--heading-color);
             font-weight: 800;
         }
 
@@ -320,24 +365,24 @@
             margin-top: 50px;
         }
         .feature-item {
-            background-color: var(--feature-item-bg); /* Use variable */
+            background-color: var(--feature-item-bg);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px var(--feature-item-shadow); /* Use variable */
+            box-shadow: 0 5px 15px var(--feature-item-shadow);
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .feature-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px var(--feature-item-shadow-hover); /* Use variable */
+            box-shadow: 0 8px 20px var(--feature-item-shadow-hover);
         }
         .feature-item h3 {
-            color: var(--primary-color); /* Use variable */
+            color: var(--primary-color);
             margin-top: 0;
         }
         .feature-item p {
             font-size: 1em;
-            color: var(--secondary-text-color); /* Use variable */
+            color: var(--secondary-text-color);
         }
 
         /* Screenshot/Demo Section */
@@ -352,14 +397,14 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow-color); /* Use variable */
+            box-shadow: 0 5px 15px var(--shadow-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .screenshot-gallery img:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 20px var(--shadow-color-hover); /* Use variable */
+            box-shadow: 0 8px 20px var(--shadow-color-hover);
         }
-        .screenshot-gallery p[style] { /* Specific override for screenshot note */
+        .screenshot-gallery p[style] {
             color: var(--secondary-text-color) !important;
         }
 
@@ -380,14 +425,14 @@
             padding-left: 50px;
             position: relative;
             font-size: 1.1em;
-            color: var(--text-color); /* Use variable */
+            color: var(--text-color);
         }
         .how-it-works-steps li::before {
             content: counter(step-counter);
             position: absolute;
             left: 0;
             top: 0;
-            background-color: var(--primary-color); /* Use variable */
+            background-color: var(--primary-color);
             color: #ffffff;
             width: 35px;
             height: 35px;
@@ -397,89 +442,88 @@
             justify-content: center;
             font-weight: 700;
             font-size: 1.2em;
-            box-shadow: 0 3px 8px var(--cta-shadow-primary); /* Use variable */
+            box-shadow: 0 3px 8px var(--cta-shadow-primary);
         }
         .how-it-works-steps code {
-            background-color: var(--code-bg-color); /* Use variable */
+            background-color: var(--code-bg-color);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
             font-size: 0.9em;
-            color: var(--code-text-color); /* Use variable */
+            color: var(--code-text-color);
         }
-        .how-it-works-steps img { /* Styling for instructional images */
+        .how-it-works-steps img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 10px var(--shadow-color); /* Use variable */
+            box-shadow: 0 4px 10px var(--shadow-color);
             margin: 15px 0;
         }
-        .how-it-works-steps p[style] { /* Specific override for instruction notes */
+        .how-it-works-steps p[style] {
             color: var(--secondary-text-color) !important;
         }
 
         /* Updates Section Specifics */
         .updates-content ul {
-            list-style: none; /* Remove default bullet points */
+            list-style: none;
             padding: 0;
             margin: 0;
         }
         .updates-content li {
-            background-color: var(--section-list-item-bg); /* Use variable */
-            border: 1px solid var(--section-list-item-border); /* Use variable */
+            background-color: var(--section-list-item-bg);
+            border: 1px solid var(--section-list-item-border);
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px var(--section-list-item-shadow); /* Use variable */
+            box-shadow: 0 4px 8px var(--section-list-item-shadow);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .updates-content li:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px var(--section-list-item-shadow-hover); /* Use variable */
+            box-shadow: 0 6px 12px var(--section-list-item-shadow-hover);
         }
         .updates-content li strong {
             display: block;
             margin-bottom: 10px;
             font-size: 1.1em;
-            color: var(--primary-color); /* Use variable */
+            color: var(--primary-color);
         }
-        .updates-content li ul { /* Inner list for sub-points */
-            list-style: disc; /* Use bullets for sub-points */
+        .updates-content li ul {
+            list-style: disc;
             margin-left: 20px;
             font-size: 0.95em;
-            color: var(--secondary-text-color); /* Use variable */
+            color: var(--secondary-text-color);
         }
         .updates-content li ul li {
-            background: none; /* No background for inner list items */
+            background: none;
             border: none;
             box-shadow: none;
             padding: 5px 0;
             margin-bottom: 5px;
-            transition: none; /* No transition for inner list items */
+            transition: none;
         }
         .updates-content li ul li:hover {
             transform: none;
             box-shadow: none;
         }
-        .updates-content p[style] { /* Specific override for updates note */
+        .updates-content p[style] {
             color: var(--secondary-text-color) !important;
         }
 
         /* Contact Section */
         .contact-content {
             font-size: 1.1em;
-            color: var(--text-color); /* Use variable */
+            color: var(--text-color);
         }
         .contact-content a {
-            color: var(--link-color); /* Use variable */
+            color: var(--link-color);
             text-decoration: none;
             font-weight: 600;
         }
         .contact-content a:hover {
             text-decoration: underline;
-            color: var(--link-hover-color); /* Use variable */
+            color: var(--link-hover-color);
         }
-
         /* GitHub Link Button Style */
         .github-link-button {
             display: inline-flex;
@@ -487,41 +531,47 @@
             margin-top: 15px;
             padding: 12px 25px;
             background-color: var(--primary-color);
-            color: white !important; /* Force text to be white */
-            text-decoration: none;
+            color: white !important; /* Ensures text is white */
+            text-decoration: none; /* Ensures no underline in normal state */
             border-radius: 8px;
             font-weight: 700;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 8px var(--cta-shadow-primary);
         }
 
-        .github-link-button:hover {
-            background-color: var(--secondary-color); /* Darker shade on hover */
+        /* Make this rule more specific to override the global 'a:hover' */
+        a.github-link-button:hover { /* CHANGED: Added 'a' to the selector for higher specificity */
+            background-color: var(--secondary-color);
             transform: translateY(-2px);
             box-shadow: 0 6px 12px var(--cta-shadow-primary-hover);
+            text-decoration: none; /* This should now reliably remove the underline on hover */
+        }
+
+        /* Specific styling for the GitHub icon within these buttons */
+        .github-link-button .fab.fa-github {
+            color: black; /* Keeps the icon color black */
         }
 
         /* Footer */
         .footer {
-            background-color: var(--footer-bg-color); /* This variable makes the footer background dark in both light and dark themes */
+            background-color: var(--footer-bg-color);
             padding: 30px 0;
             text-align: center;
             font-size: 0.9em;
-            /* REMOVED: color: #ecf0f1; from here to avoid potential conflicts */
         }
         .footer p {
             margin: 0;
             font-size: 1em;
-            color: #ecf0f1; /* Explicitly set to a light grey for ALL paragraphs in the footer */
+            color: #ecf0f1; /* Explicitly light grey for all paragraphs in the footer */
         }
         .footer a {
-            color: #ffffff; /* Explicitly set to white for ALL links in the footer */
+            color: #ffffff; /* Explicitly white for all links in the footer */
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
         }
         .footer a:hover {
-            color: #bdc3c7; /* Lighter white on hover */
+            color: #bdc3c7;
         }
 
 
@@ -534,24 +584,31 @@
             .hero p { font-size: 1.2em; max-width: 90%; }
             .hero .cta-button { font-size: 1.1em; padding: 15px 30px; }
             .navbar .logo { font-size: 1.5em; }
-            .navbar-links { margin-top: 15px; width: 100%; text-align: center; }
-            .navbar-links a { margin: 0 10px 10px 10px; display: inline-block; }
-            .section { padding: 40px 0; }
-            .section-title { font-size: 2em; }
-            .feature-item { padding: 20px; }
-            /* Adjust navbar for smaller screens, make toggle align center below links */
-            .navbar .container { flex-wrap: wrap; justify-content: center; }
-            .theme-switch-wrapper { 
-                width: 100%; 
-                justify-content: center; 
-                margin-top: 15px; /* Add some space from links */
+
+            /* Mobile specific navbar adjustments */
+            .navbar .container {
+                justify-content: flex-start; /* Align items to the left */
+                flex-wrap: nowrap; /* Keep items in a single row at the top */
+            }
+            .hamburger-menu {
+                display: block; /* Show hamburger icon on mobile */
+                order: 1; /* Place it first (left) */
+                margin-right: 15px; /* Space between hamburger and logo */
+            }
+            .navbar .logo {
+                order: 2; /* Place logo after hamburger */
+            }
+            .navbar-links-desktop {
+                display: none; /* Hide desktop links on mobile */
+            }
+            .theme-switch-wrapper {
+                margin-left: auto; /* Push theme toggle to the far right on mobile */
+                order: 3; /* Place theme toggle last (right) */
             }
         }
 
         @media (max-width: 480px) {
-            .navbar .container { flex-direction: column; }
-            /* .navbar-links { margin-top: 15px; } */ /* Handled by 768px breakpoint */
-            /* .navbar-links a { margin: 0 10px; } */ /* Handled by 768px breakpoint */
+            .navbar .container { flex-direction: row; /* Keep row for top bar */ }
             .hero h1 { font-size: 2em; }
             .hero p { font-size: 1em; }
             .hero .cta-buttons {
@@ -562,12 +619,12 @@
             .hero .cta-button {
                 font-size: 1em;
                 padding: 12px 25px;
-                margin-left: 0 !important; /* Override margin for stacking */
-                margin-bottom: 15px; /* Add space between stacked buttons */
-                width: 80%; /* Make buttons full width */
+                margin-left: 0 !important;
+                margin-bottom: 15px;
+                width: 80%;
             }
             .hero .cta-button:last-child {
-                margin-bottom: 0; /* No bottom margin on last button */
+                margin-bottom: 0;
             }
             .features-grid { grid-template-columns: 1fr; }
             .how-it-works-steps li { padding-left: 40px; font-size: 1em; }
@@ -578,8 +635,13 @@
 <body>
     <nav class="navbar">
         <div class="container">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+
             <a href="#" class="logo">Smart Link Saver</a>
-            <div class="navbar-links">
+
+            <div class="navbar-links-desktop">
                 <a href="#features">Features</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#screenshots">Screenshots</a>
@@ -589,11 +651,22 @@
             </div>
 
             <div class="theme-switch-wrapper">
-                <i class="fas fa-sun theme-icon light"></i> <label class="theme-switch" for="checkbox">
+                <i class="fas fa-sun theme-icon light"></i>
+                <label class="theme-switch" for="checkbox">
                     <input type="checkbox" id="checkbox" />
                     <span class="slider round"></span>
                 </label>
-                <i class="fas fa-moon theme-icon dark"></i> </div>
+                <i class="fas fa-moon theme-icon dark"></i>
+            </div>
+        </div>
+
+        <div class="mobile-menu-container" id="mobile-menu-container">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#install-unpacked">Install</a>
+            <a href="#updates">Updates</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -715,6 +788,13 @@
                     </li>
                 </ol>
             </div>
+
+            <h3 style="margin-top: 60px;">Download Smart Link Saver from GitHub</h3>
+            <p>If you're interested for downloading this extension from GitHub, you can download it from GitHub Releases Page:</p>
+            <a href="https://github.com/Alapipapi/smart-link-saver-extension/releases" target="_blank" class="github-link-button" style="margin-bottom: 20px;">
+                <i class="fab fa-github" style="margin-right: 8px;"></i>
+                Download Extension from GitHub Releases
+            </a>
         </div>
     </section>
 
@@ -753,9 +833,8 @@
                 For feature requests, bug reports, or technical issues with the Smart Link Saver Extension,
                 please use our dedicated GitHub Issues tracker. This helps us prioritize and track all feedback efficiently:
                 <br>
-                <a href="https://github.com/Alapipapi/smart-link-saver-website/issues" target="_blank" class="github-link-button">
-                    <img src="images/github.png" alt="GitHub icon" style="height: 1.2em; vertical-align: middle; margin-right: 8px;">
-                    Submit an Issue
+                <a href="https://github.com/Alapipapi/smart-link-saver-extension/issues" target="_blank" class="github-link-button">
+                    <i class="fab fa-github" style="margin-right: 8px;"></i> Submit an Issue
                 </a>
             </p>
 
@@ -763,9 +842,8 @@
                 Want to contribute code or suggest improvements directly to the Smart Link Saver Extension?
                 Submit a Pull Request on GitHub:
                 <br>
-                <a href="https://github.com/Alapipapi/smart-link-saver-website/pulls" target="_blank" class="github-link-button">
-                    <img src="images/github.png" alt="GitHub icon" style="height: 1.2em; vertical-align: middle; margin-right: 8px;">
-                    Open a Pull Request
+                <a href="https://github.com/Alapipapi/smart-link-saver-extension/pulls" target="_blank" class="github-link-button">
+                    <i class="fab fa-github" style="margin-right: 8px;"></i> Open a Pull Request
                 </a>
             </p>
 
@@ -787,6 +865,8 @@
         const themeToggle = document.getElementById('checkbox');
         const body = document.body;
         const localStorageKey = 'smartLinkSaverTheme';
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const mobileMenuContainer = document.getElementById('mobile-menu-container');
 
         // Function to set the theme
         function setTheme(theme) {
@@ -823,13 +903,25 @@
         });
 
         // (Optional) Listen for changes in OS dark mode preference after page load
-        // This will update the site if the user changes their OS theme *while* the page is open,
-        // but only if they haven't manually overridden it with the toggle.
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             if (!localStorage.getItem(localStorageKey)) { // Only react to OS changes if no manual override
                 setTheme(event.matches ? 'dark' : 'light');
             }
         });
+
+        // Hamburger menu toggle functionality
+        hamburgerMenu.addEventListener('click', () => {
+            mobileMenuContainer.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked (for smooth navigation)
+        // Note: We now target 'a' elements directly within mobileMenuContainer
+        document.querySelectorAll('#mobile-menu-container a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuContainer.classList.remove('active');
+            });
+        });
+
     </script>
 </body>
 </html>

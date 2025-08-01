@@ -357,9 +357,20 @@
             box-shadow: 0 8px 15px var(--cta-shadow-primary); /* Shadow on hover */
         }
 
-        /* Ensure GitHub icon in the new CTA is black */
+        /* Light mode (default) - Icon is black */
         .hero .cta-button.secondary-cta .fab.fa-github {
-            color: black; /* This explicitly sets the icon color to black */
+            color: black;
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            /* NEW: GitHub icon color for dark mode */
+            --github-icon-color: white;
+        }
+
+        /* Dark mode icon override */
+        body.dark-mode .hero .cta-button.secondary-cta .fab.fa-github {
+            color: var(--github-icon-color); /* Use the variable to set the icon color to white */
         }
 
         /* Adjustments for CTA buttons on mobile */

@@ -39,10 +39,6 @@ To run this website locally:
     ```
 3.  Open `index.html` in your web browser.
 
-## Contribution
-
-If you have suggestions for the website or find issues with the extension, please feel free to open an issue on the Issues tab.
-
 ---
 
 © 2025 Smart Link Saver. All rights reserved.

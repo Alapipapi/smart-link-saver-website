@@ -578,6 +578,30 @@
             color: var(--secondary-text-color) !important;
         }
 
+        .show-more-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none; /* In case you use an 'a' tag instead of a button */
+        }
+
+        .show-more-button:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 10px var(--cta-shadow-primary);
+        }
+
+        .older-updates {
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+
         /* Contact Section */
         .contact-content {
             font-size: 1.1em;
@@ -879,34 +903,52 @@
                 </p>
                 <ul>
                     <li>
-                        <strong>August 6, 2025 - Version 1.1.1 (Minor Updates & Fixes):</strong>
+                        <strong>August 10, 2025 - Version 1.2.0 (Advanced Link Management):</strong>
                         <ul>
-                            <li>Display Version Number: The current version number of the extension is now displayed in the bottom-right corner of the popup.</li>
-                            <li>Prevent Saving Internal Pages: Added a check to prevent accidentally saving the "View Saved Links" page.</li>
-                            <li>Duplicate URL Prevention: The extension will now automatically prevent you from saving the same link twice.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>August 2, 2025 - Version 1.1.0 (Major Update):</strong>
-                        <ul>
-                            <li>Keyboard Shortcut Integration: Added a new keyboard shortcut (`Ctrl+Shift+S` on Windows/Linux or `Command+Shift+S` on Mac) to quickly open the extension popup.</li>
-                            <li>Export Saved Links: You can now export all of your saved links to a JSON file for backup and portability.</li>
-                            <li>Smart Suggestions for Titles: The note field is now automatically pre-filled with the current web page's title.</li>
-                            <li>Revamped Success and Error Messages: Implemented a more modern and visually appealing UI with icons and smooth animations.</li>
-                            <li>Tags Support: Continued to support saving and searching links by custom tags for better organization.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>July 18, 2025 - Version 1.0.0 (Initial Release):</strong>
-                        <ul>
-                            <li>Core functionality for saving web links with notes.</li>
-                            <li>Clean and intuitive user interface for the extension popup.</li>
-                            <li>Basic dark mode support for user comfort.</li>
-                            <li>URL validation to ensure valid links are saved.</li>
-                            <li>View and search all saved links on a dedicated page.</li>
+                            <li>Edit Links: You can now edit the URL, note, and tags of any saved link from the "View Saved Links" page.</li>
+                            <li>Tag Cloud: A dynamic tag cloud now shows all your unique tags, allowing you to filter links with a single click.</li>
+                            <li>Clear All Links: Added a button to delete your entire library of saved links at once with a confirmation prompt.</li>
+                            <li>Bulk Delete: A new workflow using checkboxes allows you to select and delete multiple links at once.</li>
+                            <li>Link Count Display: The page now shows a live count of your total and currently displayed saved links.</li>
+                            <li>Revamped Saved Links Page: The "View Saved Links" page has been redesigned for better usability and aesthetics.</li>
                         </ul>
                     </li>
                 </ul>
+                <div id="older-updates" style="display: none;">
+                    <ul>
+                        <li>
+                            <strong>August 6, 2025 - Version 1.1.1 (Minor Updates & Fixes):</strong>
+                            <ul>
+                                <li>Display Version Number: The current version number of the extension is now displayed in the bottom-right corner of the popup.</li>
+                                <li>Prevent Saving Internal Pages: Added a check to prevent accidentally saving the "View Saved Links" page.</li>
+                                <li>Duplicate URL Prevention: The extension will now automatically prevent you from saving the same link twice.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>August 2, 2025 - Version 1.1.0 (Major Update):</strong>
+                            <ul>
+                                <li>Keyboard Shortcut Integration: Added a new keyboard shortcut (`Ctrl+Shift+S` on Windows/Linux or `Command+Shift+S` on Mac) to quickly open the extension popup.</li>
+                                <li>Export Saved Links: You can now export all of your saved links to a JSON file for backup and portability.</li>
+                                <li>Smart Suggestions for Titles: The note field is now automatically pre-filled with the current web page's title.</li>
+                                <li>Revamped Success and Error Messages: Implemented a more modern and visually appealing UI with icons and smooth animations.</li>
+                                <li>Tags Support: Continued to support saving and searching links by custom tags for better organization.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>July 18, 2025 - Version 1.0.0 (Initial Release):</strong>
+                            <ul>
+                                <li>Core functionality for saving web links with notes.</li>
+                                <li>Clean and intuitive user interface for the extension popup.</li>
+                                <li>Basic dark mode support for user comfort.</li>
+                                <li>URL validation to ensure valid links are saved.</li>
+                                <li>View and search all saved links on a dedicated page.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <p style="text-align: center; margin-top: 30px;">
+                    <button id="show-more-btn" class="show-more-button">Show More</button>
+                </p>
                 <p style="text-align: center; margin-top: 30px;">
                     We're committed to continuously improving Smart Link Saver. Check back weekly for more!
                 </p>
@@ -1012,6 +1054,20 @@
             });
         });
 
+        // Show/Hide changelog functionality
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const olderUpdates = document.getElementById('older-updates');
+        if (showMoreBtn && olderUpdates) {
+            showMoreBtn.addEventListener('click', () => {
+                if (olderUpdates.style.display === 'none' || olderUpdates.style.display === '') {
+                    olderUpdates.style.display = 'block';
+                    showMoreBtn.textContent = 'Show Less';
+                } else {
+                    olderUpdates.style.display = 'none';
+                    showMoreBtn.textContent = 'Show More';
+                }
+            });
+        }
     </script>
 </body>
 </html>

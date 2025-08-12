@@ -903,19 +903,28 @@
                 </p>
                 <ul>
                     <li>
-                        <strong>August 10, 2025 - Version 1.2.0 (Advanced Link Management):</strong>
+                        <strong>August 12, 2025 - Version 1.2.1 (Quality of Life Improvements):</strong>
                         <ul>
-                            <li>Edit Links: You can now edit the URL, note, and tags of any saved link from the "View Saved Links" page.</li>
-                            <li>Tag Cloud: A dynamic tag cloud now shows all your unique tags, allowing you to filter links with a single click.</li>
-                            <li>Clear All Links: Added a button to delete your entire library of saved links at once with a confirmation prompt.</li>
-                            <li>Bulk Delete: A new workflow using checkboxes allows you to select and delete multiple links at once.</li>
-                            <li>Link Count Display: The page now shows a live count of your total and currently displayed saved links.</li>
-                            <li>Revamped Saved Links Page: The "View Saved Links" page has been redesigned for better usability and aesthetics.</li>
+                            <li>No Notes Title: Links without a specific note will now display "No Notes" as the title, providing a cleaner and more organized look.</li>
+                            <li>No Search Results Message: A new message now appears when a search query yields no results, offering an option to easily clear the search and return to the full list.</li>
+                            <li>Improved `renderLinks` Logic: The logic for displaying link titles has been refined to correctly prioritize "No Notes" over the URL when a note is not present, regardless of whether tags are included.</li>
                         </ul>
                     </li>
                 </ul>
+
                 <div id="older-updates" style="display: none;">
                     <ul>
+                        <li>
+                            <strong>August 10, 2025 - Version 1.2.0 (Advanced Link Management):</strong>
+                            <ul>
+                                <li>Edit Links: You can now edit the URL, note, and tags of any saved link from the "View Saved Links" page.</li>
+                                <li>Tag Cloud: A dynamic tag cloud now shows all your unique tags, allowing you to filter links with a single click.</li>
+                                <li>Clear All Links: Added a button to delete your entire library of saved links at once with a confirmation prompt.</li>
+                                <li>Bulk Delete: A new workflow using checkboxes allows you to select and delete multiple links at once.</li>
+                                <li>Link Count Display: The page now shows a live count of your total and currently displayed saved links.</li>
+                                <li>Revamped Saved Links Page: The "View Saved Links" page has been redesigned for better usability and aesthetics.</li>
+                            </ul>
+                        </li>
                         <li>
                             <strong>August 6, 2025 - Version 1.1.1 (Minor Updates & Fixes):</strong>
                             <ul>
@@ -946,6 +955,7 @@
                         </li>
                     </ul>
                 </div>
+                
                 <p style="text-align: center; margin-top: 30px;">
                     <button id="show-more-btn" class="show-more-button">Show More</button>
                 </p>
